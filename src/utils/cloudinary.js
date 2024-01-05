@@ -9,16 +9,16 @@ cloudinary.config({
 const uploadOnCloudinary = async (filePath) => {
   try {
     if (!filePath) return null;
-    const response = await cloudinary.uploader.upload(fileUrlPath, {
+    const response = await cloudinary.uploader.upload(filePath, {
       resource_type: "auto",
     });
-    console.log(response.url);
+    // console.log("Response : ", response);
+    fs.unlinkSync(filePath);
     return response;
   } catch (error) {
     fs.unlinkSync(filePath);
     return null;
   }
 };
-const upload = multer({ storage: storage });
 
 export { uploadOnCloudinary };

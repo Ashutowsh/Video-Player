@@ -1,14 +1,13 @@
 import connectDB from "./db/index.js";
 import dotenv from "dotenv";
-import express from "express";
-// require("dotenv").config({ path: "./env" });
+import { app } from "./app.js";
+// require("dotenv").config({ path: "./.env" });
 
 dotenv.config({
-  path: "./env",
+  path: "./.env",
 });
 // console.log(process.env.PORT);
 const port = process.env.PORT;
-const app = express();
 connectDB()
   .then(() => {
     app.on("error", (error) => {
@@ -22,6 +21,3 @@ connectDB()
   .catch((error) => {
     console.log("Database Connection Failed : ", error);
   });
-
-import userRouter from "./routes/user.routes.js";
-app.use("/api/v1/users", userRouter);
